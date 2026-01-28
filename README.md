@@ -5,6 +5,7 @@ requirement:
 2. rofi
 3. hyprland
 4. ncmcpcpp
+5. Rajdhani & Orbitron from Google.Font. download and install
 
 instalation:
 1. for dotIcons mv to .icons
