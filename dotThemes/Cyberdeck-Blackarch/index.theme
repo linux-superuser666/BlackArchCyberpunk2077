@@ -1,0 +1,12 @@
+Type=X-GNOME-Metatheme
+[Desktop Entry]
+Name=Cyberdeck-Blackarch
+Comment=An Flat Gtk+ theme based on Elegant Design
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Cyberdeck-Blackarch
+MetacityTheme=Cyberdeck-Blackarch
+IconTheme=Tela-circle-Dark
+CursorTheme=Catppuccin-cursors
+ButtonLayout=close,minimize,maximize:menu
