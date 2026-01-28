@@ -1,0 +1,78 @@
+/*****----- Global Properties -----*****/
+@import                          "shared/colors.rasi"
+@import                          "shared/fonts.rasi"
+
+/*****----- Main Window -----*****/
+window {
+    location:                    east;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       551px;
+    height:                      330px;
+    x-offset:                    -30px;
+    y-offset:                    0px;
+    padding:                     15px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @selected;
+    background-color:            #862f2e34;
+    background-image:            url("~/.config/hypr/rofi/shared/root-pass.png", width); 
+    cursor:                      "default";
+    children:                    [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      200px 20px 0px 40px;
+    padding:                     5px;
+    border:                      0px solid;
+    border-radius:               0px;
+    font:						 "rajdhani 30";
+    border-color:                @selected;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    children:                    [ "entry" ];
+}
+
+dummy {
+    expand:                      false;
+    width:                       10px;
+    font:	 					 "rajdhani 30";
+    background-color:            transparent;
+}
+
+prompt {
+    enabled:                     true;
+    background-color:            inherit;
+    font: 						 "rajdhani 30";
+    text-color:                  inherit;
+}
+textbox-prompt-colon {
+    enabled:                     true;
+    padding:                     5px 0px;
+    font:						 "rajdhani 30";
+    expand:                      false;
+    str:                         "";
+    padding:					 0px 20px 0px 0px;
+    background-color:            inherit;
+    text-color:                  @urgent;
+}
+entry {
+    enabled:                     true;
+    padding:                     0px 0px;
+    background-color:            inherit;
+    text-color:                  #d51515;
+    cursor:                      text;
+    horizontal-align:			 0.5;
+    vertical-align:				 0.5;
+    font:						 "rajdhani 30";
+    placeholder:                 "";
+    placeholder-color:           #222222;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     false;
+}

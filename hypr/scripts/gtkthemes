@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+THEME='Cyberdeck-Blackarch'
+ICONS='BlackArch-Cyberdeck'
+FONT='Noto 10'
+CURSOR='blackarch-cursor'
+
+SCHEMA='gsettings set org.gnome.desktop.interface'
+
+apply_themes () {
+	${SCHEMA} gtk-theme "$THEME"
+	${SCHEMA} icon-theme "$ICONS"
+	${SCHEMA} cursor-theme "$CURSOR"
+	${SCHEMA} font-name "$FONT"
+}
+
+apply_themes
+ 

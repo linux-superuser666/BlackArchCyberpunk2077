@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+CONFIG_DIR="$HOME/.config/eww"
+
+# Start daemon jika belum berjalan
+if ! pgrep -fx "eww daemon --config $CONFIG_DIR" >/dev/null; then
+    eww daemon --config "$CONFIG_DIR"
+    sleep 0.4
+fi
+
+# Hitung window yang aktif (bukan template)
+ACTIVE=$(eww active-windows --config "$CONFIG_DIR" | grep -c "radio-station")
+
+if [ "$ACTIVE" -eq 0 ]; then
+    # Belum ada → buka
+    eww open radio-station --config "$CONFIG_DIR"
+
+else
+    # Kalau sudah ada → tutup
+    eww close radio-station --config "$CONFIG_DIR"
+fi

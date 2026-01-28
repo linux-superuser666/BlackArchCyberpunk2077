@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+DIR="$HOME/.config/rofi"
+RASI="$DIR/launcher.rasi"
+
+# Buka frame launcher di Quickshell
+quickshell ipc call launcher toggle
+
+# Jalankan rofi (BLOCKING)
+rofi -show drun -theme "$RASI"
+
+# Setelah rofi ditutup → tutup frame launcher
+quickshell ipc call launcher toggle

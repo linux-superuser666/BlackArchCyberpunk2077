@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Matikan waybar jika berjalan
+if pgrep -f waybar >/dev/null; then
+    echo "Waybar terdeteksi — menghentikan..."
+    killall waybar
+    sleep 1
+fi
+
+# Jalankan waybar ulang
+echo "Menjalankan Waybar..."
+waybar &
+
+notify-send "WAYBAR" "Waybar Reloaded"

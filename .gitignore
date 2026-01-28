@@ -1,0 +1,17 @@
+# cache / build
+.cache/
+**/.cache/
+**/cache/
+
+# temporary
+*.log
+*.tmp
+*.swp
+*.swo
+
+# secrets
+.env
+.env.*
+*.key
+*.pem
+

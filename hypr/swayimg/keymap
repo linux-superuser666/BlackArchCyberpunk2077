@@ -1,0 +1,21 @@
+# Default key bindings for swayimg
+
+# Navigasi
+Right = next
+Left = prev
+Up = zoom_in
+Down = zoom_out
+Space = next
+BackSpace = prev
+
+# Gambar
+R = rotate_right
+L = rotate_left
+M = mirror_horizontal
+F = fullscreen_toggle
+I = info_toggle
+B = background_toggle
+
+# Quit
+Q = quit
+Escape = quit

@@ -1,0 +1,46 @@
+# ==========================
+# Swayimg default config
+# ==========================
+
+# Folder tema dan keymap
+theme_path = ~/.config/swayimg/theme
+keymap_path = ~/.config/swayimg/keymap
+
+# Tampilan & UI
+background_color = #000000
+fullscreen = false
+border = false
+info = true
+statusbar = true
+
+# Mode gambar
+scaling = fit
+zoom_step = 10
+rotation = 0
+mirror = none
+animation = true
+
+# Navigasi
+wrap = true
+sort = name
+recurse = true
+
+# File yang bisa dibuka
+include = jpg,jpeg,png,gif,bmp,webp,tiff,svg,avif,heic,heif
+
+# Input keymap (jika tidak pakai keymap custom)
+keymap = default
+
+# Behavior
+confirm_quit = false
+keep_zoom = false
+loop = true
+transition_time = 200
+
+# Cache
+preload = true
+cache_size = 128
+
+# Debug/logging
+verbosity = normal
+log_file = /tmp/swayimg.log

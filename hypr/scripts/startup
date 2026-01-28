@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+ 
+# Kill already running process
+_ps=(mako)
+for _prs in "${_ps[@]}"; do
+	if [[ `pidof ${_prs}` ]]; then
+		killall -9 ${_prs}
+	fi
+done
+
+# Polkit agent
+if [[ ! `pidof xfce-polkit` ]]; then
+	/usr/lib/xfce-polkit/xfce-polkit &
+fi
+
+# Set wallpaper
+~/.config/hypr/scripts/wallpaper &
+
+# Apply themes
+~/.config/hypr/scripts/gtkthemes &
+  
+# Activate Sound Effect
+#~/.config/hypr/scripts/hypr-sound-events.sh
+ 
+#exec waybar &
+ 
+# Lauch statusbar (eww)
+#~/.config/eww/eww.sh &
+ 
+# Lauch checkupdate (background work)
+#~/.config/hypr/scripts/update-system.sh &
+
+qs &
+
+#~/.config/hypr/scripts/checkupdates &
+ 
+# Start network manager applet
+nm-applet --indicator &
+ 
+# Start mpd
+exec mpd &
+exec ncmpcpp &
+

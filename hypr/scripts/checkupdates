@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+ICON="$HOME/.config/quickshell/assets/icons/package64.png"
+UPDATES=$(checkupdates 2>/dev/null)
+COUNT=$(echo "$UPDATES" | wc -l)
+
+# KIRIM KE STDOUT (INI YANG DIBACA QML)
+echo "$COUNT"
+
+# Optional notif
+if [ "$COUNT" -gt 0 ]; then
+  notify-send \
+  -i "$ICON" \
+  "SYSTEM UPDATE AVAILABLE" \
+  "$COUNT package(s) need update"
+
+fi

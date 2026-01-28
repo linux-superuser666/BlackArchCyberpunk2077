@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+  
+#variable
+EWW="$HOME/.config/eww"
+ 
+#check jika eww belum jalan -----
+if ! pgrep -x "eww" > /dev/null; then
+#maka jalankan
+    eww daemon --config "$EWW"
+    sleep 0.5
+fi
+
+#variable baru 
+WINDOW_COUNT=$(eww windows --config "$EWW" | grep -c "*lock")
+   
+#function & action
+#cek jika ada multiple window "lock"
+if [ "$WINDOW_COUNT" -eq 0 ]; then
+    eww open lock --config "$EWW"
+elif [ "$WINDOW_COUNT" -gt 1 ]; then
+
+#jika ada maka tutup agar hanya ada 1 window yang terbuka
+    eww close lock --config "$EWW"
+    eww open lock --config "$EWW"
+fi
+ 

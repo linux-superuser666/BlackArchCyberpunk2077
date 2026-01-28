@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+CONFIG_DIR="$HOME/.config/eww"
+ 
+if ! pgrep -x "eww" > /dev/null; then
+    eww daemon --config "$CONFIG_DIR"
+    sleep 0.5
+fi
+ 
+WINDOW_COUNT=$(eww windows --config "$CONFIG_DIR" | grep -c "*access-manager")
+
+if [ "$WINDOW_COUNT" -eq 0 ]; then
+
+    eww open access-manager --config "$CONFIG_DIR"
+elif [ "$WINDOW_COUNT" -gt 1 ]; then
+
+    eww close access-manager --config "$CONFIG_DIR"
+    eww open access-manager --config "$CONFIG_DIR"
+fi

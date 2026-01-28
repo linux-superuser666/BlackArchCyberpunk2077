@@ -1,0 +1,223 @@
+/*****----- Configuration -----*****/
+configuration {
+	modi:                       "drun";
+    show-icons:                 false;
+    display-drun:               " Apps";
+    display-run:                " Run";
+    display-filebrowser:        " Files";
+    display-window:             " Windows";
+	drun-display-format:        "{name}";
+	window-format:              "{c} · {t}";
+}
+
+/*****----- Global Properties -----*****/
+@import                          "shared/colors.rasi"
+@import                          "shared/fonts.rasi"
+/*****-----
+* {
+    selected:               var(selected);
+    handle-colour:               var(selected);
+    background-colour:           var(background);
+    foreground-colour:           var(foreground);
+    background-alt:        var(background-alt);
+    normal-background:           var(background);
+    normal-foreground:           var(foreground);
+    urgent-background:           var(urgent);
+    urgent-foreground:           var(background);
+    active-background:           var(active);
+    active-foreground:           var(background);
+    selected-normal-background:  var(foreground);
+    selected-normal-foreground:  var(background);
+    selected-urgent-background:  var(active);
+    selected-urgent-foreground:  var(background);
+    selected-active-background:  var(urgent);
+    selected-active-foreground:  var(background);
+    alternate-normal-background: var(background);
+    alternate-normal-foreground: var(foreground);
+    alternate-urgent-background: var(urgent);
+    alternate-urgent-foreground: var(background);
+    alternate-active-background: var(active);
+    alternate-active-foreground: var(background);
+}
+-----*****/
+
+/*****----- Main Window -----*****/
+window {
+    /* properties for window widget */
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       370px;
+    height:                      184px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+    /* properties for all widgets */
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @selected;
+    cursor:                      "default";
+    background-color:            transparent;
+
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     10px 0px 0px 23px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @selected;
+    background-color:            transparent;
+    background-image:            url("~/.config/rofi/interfaces/windows/window-bg.png", width);
+    children:                    [ "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px 0px 0px 0px solid;
+    border-radius:               0px;
+    border-color:              #fe6760;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    children:                    [ "textbox-prompt-colon" ];
+}
+
+prompt {
+    enabled:                     true;
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+textbox-prompt-colon {
+    enabled:                     true;
+    font:                        "Rajdhani 14";
+    expand:                      true;
+    margin                       :0px;
+    str:                         "󰀩  SYSTEM APPLICATIONS RUNNING ON WINDOW ";
+    padding:                     5px 0px 9px 5px;
+    background-color:          #f9555233;
+    text-color:                  @urgent;
+    border:                      1px solid;
+    border-radius:               0px;
+    border-color:               #f95452;
+}
+entry {
+    enabled:                     true;
+    padding:                     0px 8px;
+    background-color:          #fe6760;
+    text-color:                  inherit;
+    cursor:                      text;
+    vertical-align:              0.5;
+    font: "Orpheis               20";
+    placeholder:                 "TYPE HERE";
+    placeholder-color:           #222222;
+}
+num-filtered-rows {
+    enabled:                     true;
+    expand:                      false;
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+textbox-num-sep {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "/";
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+num-rows {
+    enabled:                     true;
+    expand:                      false;
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+message {
+    enabled:                     true;
+    str:                         "sadad";
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       4;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    spacing:                     0px;
+    margin:                      56px 0px 0px 0px;
+    padding:                     3px 5px 3px 5px ;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                transparent;
+    background-color:            transparent;
+    text-color:                  @foreground-colour;
+    cursor:                      "default";
+}
+
+scrollbar {
+    handle-width:                4px;
+    handle-color:              #e7655f;
+    border-radius:               100px;
+    background-color:          #000000;
+}
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    margin:                      0px 0px 1px 0px;
+    padding:                     2px 10px 1px 10px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @selected;
+    background-color:            transparent;
+    text-color:                #76f8ff;
+    cursor:                      pointer;
+}
+
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    font:                        "Rajdhani semibold 12";
+}
+
+element normal.normal,
+element alternate.normal,
+element normal.urgent{
+    background-image:            url("~/.config/rofi/interfaces/windows/window-idle.png", width);
+    background-color:            transparent;
+    text-color:                #f0504c;
+}
+
+element selected.normal{
+    background-image:            url("~/.config/rofi/interfaces/windows/window-hover.png", width);
+    background-color:            transparent;
+    text-color:                #f0504c;
+}
+element selected.active,
+element selected.urgent,
+element alternate.urgent,
+element normal.active,
+element alternate.active {
+	background-image:            url("~/.config/rofi/interfaces/windows/window-click.png", width);
+    background-color:            transparent;
+    text-color:                #0E101C;
+}

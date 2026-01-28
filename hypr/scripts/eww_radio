@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+CONFIG_DIR="$HOME/.config/eww"
+LOCK="/tmp/eww-radio.lock"
+
+# pastikan daemon jalan
+if ! pgrep -fx "eww daemon --config $CONFIG_DIR" >/dev/null; then
+    eww daemon --config "$CONFIG_DIR"
+    sleep 0.4
+fi
+
+eww open radio-station 
+
+# ===== LOCK =====
+#if [ -e "$LOCK" ]; then
+    # window dianggap aktif → tutup
+#    eww close radio-station --config "$CONFIG_DIR"
+#    rm -f "$LOCK"
+#else
+    # buka & kunci
+#    touch "$LOCK"
+#    eww open radio-station --config "$CONFIG_DIR"
+#fi

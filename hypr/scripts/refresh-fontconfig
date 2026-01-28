@@ -1,0 +1,32 @@
+
+#jika ada maka backup
+mv ~/.config/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf.bak
+fc-cache -rv
+
+
+#jika tidak ada maka buat
+mkdir -p ~/.config/fontconfig
+nano ~/.config/fontconfig/fonts.conf
+
+#echo ke font.conf
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+
+  <!-- Pakai JetBrainsMono Nerd Font hanya untuk monospace -->
+  <match target="pattern">
+    <test name="family" qual="any">
+      <string>monospace</string>
+    </test>
+    <edit name="family" mode="prepend" binding="strong">
+      <string>JetBrainsMono Nerd Font</string>
+    </edit>
+  </match>
+
+</fontconfig>
+
+#tunggu 1 detik
+sleep 1
+
+#refresh font
+fc-cache -rv

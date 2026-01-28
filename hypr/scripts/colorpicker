@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+## Simple Script To Pick Color Quickly.
+
+color="$($HOME/.config/hypr/scripts/hyprpicker)"
+hex="${color#\#}"              # buang #
+image="/tmp/${hex}.png"
+
+main() {
+	if [[ -n "$color" ]]; then
+		# copy color code to clipboard
+		printf "%s" "$color" | wl-copy
+
+		# generate preview (pakai warna, simpan tanpa #)
+		convert -size 48x48 xc:"$color" "$image"
+
+		# notify about it
+		notify-send \
+			-h string:x-canonical-private-synchronous:sys-notify-picker \
+			-u low \
+			-i "$image" \
+			"$color" \
+			"copied to clipboard."
+	fi
+}
+
+main

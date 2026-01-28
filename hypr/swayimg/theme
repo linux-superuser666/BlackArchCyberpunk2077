@@ -1,0 +1,6 @@
+# BlackArch Cybderdeck
+text_color = #FEFEFE
+background_color = #0E101C
+bar_color = #111111AA
+highlight_color = #00BFFF
+font = monospace 12
