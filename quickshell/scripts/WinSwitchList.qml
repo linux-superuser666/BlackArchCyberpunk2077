@@ -12,11 +12,26 @@ Item {
     property string buffer: ""
 
     function refresh() {
+        if (proc.running)
+            return ;
+
         buffer = "";
         proc.running = true;
     }
 
     Component.onCompleted: refresh()
+
+    Timer {
+        id: refreshTimer
+
+        interval: 500
+        repeat: true
+        running: GlobalState.winSwitchActive
+        triggeredOnStart: false
+        onTriggered: {
+            refresh();
+        }
+    }
 
     Process {
         id: proc
@@ -25,8 +40,8 @@ Item {
         running: false
         onExited: {
             try {
-                root.windows = JSON.parse(root.buffer);
-                console.log("Loaded windows:", root.windows.length);
+                root.windows = JSON.parse(buffer);
+                console.log("Loaded windows:", windows.length);
             } catch (e) {
                 console.warn("JSON parse error", e);
             }
@@ -34,7 +49,7 @@ Item {
 
         stdout: SplitParser {
             onRead: (data) => {
-                root.buffer += data;
+                return buffer += data;
             }
         }
 
