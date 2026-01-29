@@ -1,5 +1,7 @@
 Cyberdeck Shell by mrnngstr666
 
+This Shell can use in ArchLinux, BlackArch Linux, Hyprland/Wayland not for X11
+
 requirement:
 1. quickshell or quickshell-git
 2. rofi
