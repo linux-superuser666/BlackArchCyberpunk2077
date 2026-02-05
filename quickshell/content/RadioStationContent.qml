@@ -47,11 +47,11 @@ Rectangle {
         switch (event.key) {
         case Qt.Key_Plus:
         case Qt.Key_Equal:
-            volume.up();
+            mpdVolume.up();
             event.accepted = true;
             break;
         case Qt.Key_Minus:
-            volume.down();
+            mpdVolume.down();
             event.accepted = true;
             break;
         case Qt.Key_F:
@@ -78,8 +78,8 @@ Rectangle {
     implicitWidth: 400
     implicitHeight: 520
 
-    Volume {
-        id: volume
+    MpdVolume {
+        id: mpdVolume
     }
 
     Playlist {
@@ -213,7 +213,8 @@ Rectangle {
                             anchors.centerIn: parent
                             width: 130
                             height: 130
-                            source: "/tmp/.music_cover.jpg"
+                            cache: false
+                            source: playlist.coverPath ? playlist.coverPath + "?t=" + Date.now() : "../assets/images/music.png"
                             fillMode: Image.PreserveAspectFit
                         }
 
@@ -334,7 +335,7 @@ Rectangle {
                                         MouseArea {
                                             anchors.fill: parent
                                             cursorShape: Qt.PointingHandCursor
-                                            onClicked: volume.down()
+                                            onClicked: mpdVolume.down()
                                         }
 
                                     }
@@ -352,7 +353,7 @@ Rectangle {
                                             font.family: "Rajdhani"
                                             font.weight: Font.DemiBold
                                             color: Colors.greyx
-                                            text: volume.level + "%"
+                                            text: mpdVolume.level + "%"
                                         }
 
                                     }
@@ -372,7 +373,7 @@ Rectangle {
                                         MouseArea {
                                             anchors.fill: parent
                                             cursorShape: Qt.PointingHandCursor
-                                            onClicked: volume.up()
+                                            onClicked: mpdVolume.up()
                                         }
 
                                     }
