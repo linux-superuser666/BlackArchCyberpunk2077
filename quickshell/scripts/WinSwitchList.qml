@@ -25,7 +25,7 @@ Item {
         id: refreshTimer
 
         interval: 500
-        repeat: true
+        repeat: false
         running: GlobalState.winSwitchActive
         triggeredOnStart: false
         onTriggered: {
