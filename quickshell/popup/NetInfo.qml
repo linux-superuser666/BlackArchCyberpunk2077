@@ -29,15 +29,13 @@ PanelWindow {
     SoundEffect {
         id: popUpOut
 
-        source: "../assets/fx/notify-out.wav"
-        volume: 0.8
+        source: "../assets/fx/hover.wav"
     }
 
     SoundEffect {
         id: popUpIn
 
-        source: "../assets/fx/notify-in.wav"
-        volume: 0.8
+        source: "../assets/fx/hover.wav"
     }
 
     anchors {

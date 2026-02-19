@@ -60,10 +60,12 @@ Rectangle {
             break;
         case Qt.Key_Up:
             radioStationContent.moveUp();
+            hoverSound.play();
             event.accepted = true;
             break;
         case Qt.Key_Down:
             radioStationContent.moveDown();
+            hoverSound.play();
             event.accepted = true;
             break;
         case Qt.Key_Return:
@@ -77,6 +79,12 @@ Rectangle {
     color: "transparent"
     implicitWidth: 400
     implicitHeight: 520
+
+    SoundEffect {
+        id: hoverSound
+
+        source: "../assets/fx/hover.wav"
+    }
 
     MpdVolume {
         id: mpdVolume
@@ -537,6 +545,7 @@ Rectangle {
                             cursorShape: Qt.PointingHandCursor
                             onEntered: {
                                 radioStationContent.keyboardMode = false;
+                                hoverSound.play();
                                 hovered = true;
                                 radioStationContent.currentIndex = index;
                             }

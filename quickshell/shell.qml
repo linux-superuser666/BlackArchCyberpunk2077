@@ -18,13 +18,6 @@ import qs.widgets
 
 ShellRoot {
     Variants {
-        //Example {
-        //screen: modelData
-        //}
-        //PipewirePanel {
-        //    screen: modelData
-        //}
-
         model: Quickshell.screens
 
         delegate: Scope {

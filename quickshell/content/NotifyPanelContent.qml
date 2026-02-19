@@ -9,6 +9,7 @@ import Quickshell.Widgets
 import qs.components.common
 import qs.components.panel.notify
 import qs.components.typography
+import qs.state
 import qs.styles
 
 Rectangle {
@@ -45,6 +46,7 @@ Rectangle {
                             color: "transparent"
 
                             BinLinesState {
+                                animate: GlobalState.panelNotifyActive
                             }
 
                         }
@@ -60,13 +62,12 @@ Rectangle {
                                 width: 25
                                 height: 21
                                 source: "../assets/icons/origin-dbus.png"
-                                //source: "../assets/icons/mail-dbus.png"
                                 fillMode: Image.PreserveAspectFit
                             }
 
                             SequentialAnimation {
                                 loops: Animation.Infinite
-                                running: true
+                                running: GlobalState.panelNotifyActive
 
                                 ParallelAnimation {
                                     PropertyAnimation {

@@ -9,6 +9,7 @@ import Quickshell.Wayland
 import qs.components.common
 import qs.components.wrapper
 import qs.content
+import qs.scripts
 import qs.state
 
 PanelWindow {

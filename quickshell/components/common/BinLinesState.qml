@@ -12,6 +12,7 @@ Rectangle {
 
     property var binFrames: ["10010", "10100", "10001", "01010", "10100"]
     property int binIndex: 0
+    property bool animate: true
 
     width: 30
     height: 40
@@ -20,7 +21,7 @@ Rectangle {
     Timer {
         interval: 2000
         repeat: true
-        running: true
+        running: binLines.animate
         onTriggered: {
             binIndex = (binIndex + 1) % binFrames.length;
             binLines1.text = binFrames[binIndex];

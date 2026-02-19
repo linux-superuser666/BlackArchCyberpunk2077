@@ -1,4 +1,5 @@
 import Qt5Compat.GraphicalEffects
+import QtMultimedia
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -24,6 +25,12 @@ Rectangle {
     implicitWidth: 670
     implicitHeight: 470
     focus: false
+
+    SoundEffect {
+        id: hoverSound
+
+        source: "../assets/fx/hover.wav"
+    }
 
     Connections {
         function onConnectionFailed(ssid) {
@@ -166,6 +173,8 @@ Rectangle {
                                     clip: true
 
                                     Column {
+                                        id: ethCol
+
                                         width: parent.width
                                         spacing: 5
                                         anchors.fill: parent
@@ -243,16 +252,12 @@ Rectangle {
                                                 }
 
                                                 ToggleSwitch {
-                                                    // � OFF → disconnect
-
-                                                    // � ON kalau ethernet connected
                                                     checked: Network.activeEthernet !== null
                                                     onToggled: function(checked) {
                                                         const d = Network.ethernetDevices[0];
                                                         if (!d)
                                                             return ;
 
-                                                        // 🟢 ON → connect
                                                         if (checked)
                                                             Network.connectEthernet(d.connection, d.interface);
                                                         else
@@ -278,13 +283,13 @@ Rectangle {
                                     clip: true
 
                                     Column {
+                                        id: wLanCol
+
                                         width: parent.width
                                         spacing: 5
                                         anchors.fill: parent
 
                                         Rajdhani {
-                                            //uppercase: true
-
                                             text: "WLan"
                                             size: Texts.sm
                                             color: Colors.greyx
@@ -406,6 +411,7 @@ Rectangle {
                                                     id: hoverArea
 
                                                     hoverEnabled: true
+                                                    onEntered: hoverSound.play()
                                                     anchors.fill: parent
                                                     cursorShape: Qt.PointingHandCursor
                                                 }
@@ -1077,7 +1083,7 @@ Rectangle {
                         source: netContent
                         horizontalOffset: 0
                         verticalOffset: 0
-                        radius: 6
+                        radius: 10
                         color: Colors.redx
                     }
 
