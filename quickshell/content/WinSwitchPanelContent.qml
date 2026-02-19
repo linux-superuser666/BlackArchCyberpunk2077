@@ -280,7 +280,7 @@ Rectangle {
                                 SequentialAnimation {
                                     id: glowAnim
 
-                                    running: false
+                                    running: GlobalState.winSwitchActive
                                     loops: Animation.Infinite
 
                                     NumberAnimation {

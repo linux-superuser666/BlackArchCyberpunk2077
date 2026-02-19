@@ -26,7 +26,7 @@ PanelWindow {
     screen: screen
     color: "transparent"
     WlrLayershell.layer: WlrLayer.Top
-    implicitWidth: 300
+    implicitWidth: 400
     implicitHeight: 60
 
     PacmanSync {
@@ -42,7 +42,7 @@ PanelWindow {
         id: termUpdate
 
         running: false
-        command: ["kitty", "--title", "pacman update", "bash", "-lc", "sudo pacman -Syu"]
+        command: ["kitty", "--title", "pacman update", "bash", "-lc", "sudo pacman -Syu --noconfirm"]
     }
 
     anchors {
@@ -128,7 +128,7 @@ PanelWindow {
                                 size: 8
                                 color: Colors.redx70
                                 uppercase: true
-                                text: "connection 201.894.33"
+                                text: "control_panel 894.33"
                             }
 
                         }
@@ -201,8 +201,7 @@ PanelWindow {
                                             anchors.fill: parent
                                             cursorShape: Qt.PointingHandCursor
                                             onClicked: {
-                                                updates.refresh();
-                                                showShowTerm();
+                                                GlobalState.toggleLauncher();
                                             }
                                         }
 
@@ -372,23 +371,23 @@ PanelWindow {
                                 }
 
                                 Rectangle {
-                                    //MouseArea {
-                                    //    anchors.fill: parent
-                                    //    cursorShape: Qt.PointingHandCursor
-                                    //    hoverEnabled: true
-                                    //    onEntered: GlobalState.showNetPopup()
-                                    //    onExited: GlobalState.hideNetPopup()
-                                    //    onClicked: {
-                                    //        GlobalState.toggleNetwork();
-                                    //    }
-                                    //}
-
                                     width: 40
                                     height: 41
                                     color: "transparent"
 
-                                    Rajdhani {
-                                        text: "icon disk"
+                                    Rectangle {
+                                        width: 40
+                                        height: 50
+                                        color: "transparent"
+
+                                        Image {
+                                            anchors.centerIn: parent
+                                            width: 26
+                                            height: 25
+                                            source: "../assets/icons/panel/win-seln-icon.png"
+                                            fillMode: Image.PreserveAspectFit
+                                        }
+
                                     }
 
                                     ControlIconBox {
@@ -396,6 +395,88 @@ PanelWindow {
                                         height: 40
                                         bgColor: Colors.redx10
                                         borderWidth: 2
+                                    }
+
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        cursorShape: Qt.PointingHandCursor
+                                        onClicked: {
+                                            GlobalState.toggleWinSwitch();
+                                        }
+                                    }
+
+                                }
+
+                                Rectangle {
+                                    width: 40
+                                    height: 41
+                                    color: "transparent"
+
+                                    Rectangle {
+                                        width: 40
+                                        height: 50
+                                        color: "transparent"
+
+                                        Image {
+                                            anchors.centerIn: parent
+                                            width: 26
+                                            height: 25
+                                            source: "../assets/icons/power/session-icon.png"
+                                            fillMode: Image.PreserveAspectFit
+                                        }
+
+                                    }
+
+                                    ControlIconBox {
+                                        width: 40
+                                        height: 40
+                                        bgColor: Colors.redx10
+                                        borderWidth: 2
+                                    }
+
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        cursorShape: Qt.PointingHandCursor
+                                        onClicked: {
+                                            GlobalState.toggleWLogOut();
+                                        }
+                                    }
+
+                                }
+
+                                Rectangle {
+                                    width: 40
+                                    height: 41
+                                    color: "transparent"
+
+                                    Rectangle {
+                                        width: 40
+                                        height: 50
+                                        color: "transparent"
+
+                                        Image {
+                                            anchors.centerIn: parent
+                                            width: 26
+                                            height: 25
+                                            source: "../assets/icons/hack/ba-logo.png"
+                                            fillMode: Image.PreserveAspectFit
+                                        }
+
+                                    }
+
+                                    ControlIconBox {
+                                        width: 40
+                                        height: 40
+                                        bgColor: Colors.redx10
+                                        borderWidth: 2
+                                    }
+
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        cursorShape: Qt.PointingHandCursor
+                                        onClicked: {
+                                            GlobalState.toggleQuickHack();
+                                        }
                                     }
 
                                 }

@@ -9,6 +9,8 @@ Item {
     property int currentPos: -1
     property string songArtist: ""
     property string songTitle: ""
+    property string lastSong: ""
+    property string coverPath: ""
 
     function refreshPlaylist() {
         playlistProc.running = true;
@@ -30,6 +32,36 @@ Item {
     Component.onCompleted: {
         refreshPlaylist();
         refreshCurrent();
+    }
+    Component.onDestruction: {
+        coverProc.running = false;
+    }
+
+    Process {
+        id: notifyProc
+
+        property string title: ""
+        property string body: ""
+        property string icon: ""
+
+        command: ["sh", "-c", "notify-send -a MPD -u low -i \"" + icon + "\" \"" + title + "\" \"" + body + "\""]
+    }
+
+    Process {
+        id: coverProc
+
+        command: ["sh", "-c", "./scripts/mpdcoverart.sh"]
+
+        stdout: SplitParser {
+            onRead: (line) => {
+                const path = line.trim();
+                if (!path)
+                    return ;
+
+                playlist.coverPath = path;
+            }
+        }
+
     }
 
     ListModel {
@@ -65,9 +97,10 @@ Item {
         stdout: SplitParser {
             onRead: (line) => {
                 const t = line.trim();
-                if (!t)
+                if (!t || t === lastSong)
                     return ;
 
+                lastSong = t;
                 if (t.includes(" - ")) {
                     const p = t.split(" - ");
                     songArtist = p[0];
@@ -76,6 +109,11 @@ Item {
                     songArtist = "";
                     songTitle = t;
                 }
+                coverProc.running = true;
+                notifyProc.title = "Now Playing";
+                notifyProc.body = songArtist ? songTitle + "\n" + songArtist : songTitle;
+                notifyProc.icon = "/tmp/.music_cover.jpg";
+                notifyProc.running = true;
             }
         }
 

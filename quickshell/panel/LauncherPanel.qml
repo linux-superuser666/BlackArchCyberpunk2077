@@ -24,6 +24,10 @@ PanelWindow {
     onAnyPanelActiveChanged: {
         anyPanelActive ? launchIns.play() : launchOut.play();
     }
+    Component.onDestruction: {
+        launchOut.stop();
+        launchIns.stop();
+    }
 
     SoundEffect {
         id: launchOut

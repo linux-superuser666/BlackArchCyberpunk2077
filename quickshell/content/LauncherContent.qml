@@ -3,6 +3,12 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
+import Qt5Compat.GraphicalEffects
+import QtMultimedia
+import Quickshell.Hyprland
+import Quickshell.Io
+import Quickshell.Services.Pipewire
+import Quickshell.Wayland
 import qs.components.common
 import qs.components.panel.launcher
 import qs.components.typography
@@ -10,6 +16,7 @@ import qs.content
 import qs.scripts
 import qs.state
 import qs.styles
+
 
 Rectangle {
     id: root
@@ -37,6 +44,12 @@ Rectangle {
         list.currentIndex = -1;
     }
 
+    SoundEffect {
+        id: hoverSound
+
+        source: "../assets/fx/hover.wav"
+    }
+
     width: 400
     height: 500
     color: "transparent"
@@ -51,6 +64,7 @@ Rectangle {
             Layout.alignment: Qt.AlignLeft | Qt.AlignTop
 
             BinLinesState {
+                 animate: GlobalState.launcherActive
             }
 
             Image {
@@ -138,9 +152,11 @@ Rectangle {
                             }
                             Keys.onPressed: (event) => {
                                 if (event.key === Qt.Key_Up) {
+                                    hoverSound.play();
                                     event.accepted = true;
                                     list.currentIndex = Math.max(0, list.currentIndex - 1);
                                 } else if (event.key === Qt.Key_Down) {
+                                    hoverSound.play();
                                     event.accepted = true;
                                     list.currentIndex = Math.min(list.count - 1, list.currentIndex + 1);
                                 } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
@@ -167,18 +183,6 @@ Rectangle {
                 }
 
                 ListView {
-                    //  Image {
-                    //    anchors.fill: parent
-                    //   fillMode: Image.PreserveAspectFit
-                    //  source: {
-                    //     if (root.keyboardPressed || root.mousePressed)
-                    //        return "../assets/images/launcher/launcher-click-alt.png";
-                    //                                if (root.query.length > 0)
-                    //                                   return "../assets/images/launcher/launcher-activated.png";
-                    //                                return "../assets/images/launcher/launcher-hover.png";
-                    //                           }
-                    //                      }
-
                     id: list
 
                     width: 300
@@ -228,7 +232,10 @@ Rectangle {
                         MouseArea {
                             anchors.fill: parent
                             hoverEnabled: true
-                            onEntered: list.currentIndex = index
+                            onEntered: {
+                                hoverSound.play();
+                                list.currentIndex = index
+                            }
                             onPressed: root.mousePressed = true
                             onReleased: root.mousePressed = false
                             onClicked: list.currentIndex = index
@@ -297,9 +304,10 @@ Rectangle {
                         PanelActionOutLabel {
                             id: radioExit
 
-                            keyText: "C"
+                            keyText: "esc"
                             labelText: "CLose"
                         }
+
 
                     }
 

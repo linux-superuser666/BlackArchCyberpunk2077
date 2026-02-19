@@ -45,7 +45,7 @@ ColumnLayout {
                         Orbitron {
                             size:8
                             color: Colors.redx70
-                            text: "WAYLAND HYPRCTL 1.001.1"
+                            text: "hypr_panel 1.001.1"
                         }
 
                     }

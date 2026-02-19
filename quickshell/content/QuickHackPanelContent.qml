@@ -3,6 +3,7 @@ import QtMultimedia
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import QtMultimedia
 import Quickshell.Wayland
 import qs.components.common
 import qs.components.typography
@@ -25,7 +26,11 @@ Rectangle {
     function launchHack(exec) {
         launchRoot(exec);
     }
+  SoundEffect {
+        id: hoverSound
 
+        source: "../assets/fx/hover.wav"
+    }
     function currentInfo() {
         if (!quickHackList || !quickHackList.model)
             return null;
@@ -49,6 +54,7 @@ Rectangle {
                 panelQuickHack.keyboardHoverIndex = quickHackList.currentIndex;
                 quickHackList.positionViewAtIndex(quickHackList.currentIndex, ListView.Contain);
             }
+            hoverSound.play();
             event.accepted = true;
             break;
         case Qt.Key_Down:
@@ -58,6 +64,7 @@ Rectangle {
                 panelQuickHack.keyboardHoverIndex = quickHackList.currentIndex;
                 quickHackList.positionViewAtIndex(quickHackList.currentIndex, ListView.Contain);
             }
+            hoverSound.play();
             event.accepted = true;
             break;
         case Qt.Key_Return:
@@ -595,6 +602,7 @@ Rectangle {
                                                                 delegateRoot.hovered = true;
                                                                 panelQuickHack.keyboardHoverIndex = -1;
                                                                 hoverOnceAnim.stop();
+                                                                hoverSound.play();
                                                                 hoverImg.x = -30;
                                                                 panelQuickHack.hoveredIndex = index;
                                                                 hoverImg.opacity = 0;
@@ -764,7 +772,7 @@ Rectangle {
                                                         PanelActionOutLabel {
                                                             id: qhackExit
 
-                                                            keyText: "C"
+                                                            keyText: "esc"
                                                             labelText: "CLose"
                                                         }
 

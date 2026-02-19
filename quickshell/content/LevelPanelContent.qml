@@ -25,7 +25,6 @@ Rectangle {
     id: levelPanel
 
     property var screenPresets: []
-    property var audioOutputPresets: []
 
     function updateScreenPresets() {
         const fm = Hyprland.focusedMonitor;
@@ -46,12 +45,28 @@ Rectangle {
     implicitHeight: 470
     focus: false
 
+    Process {
+        id: wpctlSetProc
+    }
+
     Brightness {
         id: brightness
     }
 
     Volume {
         id: masterVolume
+    }
+
+    QsVolume {
+        id: qsVolume
+    }
+
+    MpdVolume {
+        id: mpdVolume
+    }
+
+    AudioPreset {
+        id: audioPresetItem
     }
 
     SoundEffect {
@@ -233,31 +248,19 @@ Rectangle {
                                         FillX {
                                         }
 
-                                        PwObjectTracker {
-                                            id: sinkTracker
-
-                                            objects: Pipewire.sinks ? Pipewire.sinks.getAll() : []
-                                            onObjectsChanged: {
-                                                levelPanel.audioOutputPresets = sinkTracker.objects.map((s) => {
-                                                    return ({
-                                                        "label": s.properties["device.description"] ?? s.name,
-                                                        "value": s.id
-                                                    });
-                                                });
-                                            }
-                                        }
-
                                         Preset {
-                                            presets: levelPanel.audioOutputPresets
+                                            id: audioPresetControl
+
+                                            presets: audioPresetItem.audioPresets.map((p) => {
+                                                return ({
+                                                    "label": p.label,
+                                                    "value": p.id
+                                                });
+                                            })
                                             onPresetChanged: (_, sinkId) => {
-                                                const model = Pipewire.sinks;
-                                                for (let i = 0; i < model.count; i++) {
-                                                    const s = model.get(i);
-                                                    if (s.id === sinkId) {
-                                                        Pipewire.defaultSink = s;
-                                                        break;
-                                                    }
-                                                }
+                                                console.log("[UI] change audio sink to", sinkId);
+                                                wpctlSetProc.command = ["sh", "-c", `wpctl set-default ${sinkId}`];
+                                                wpctlSetProc.running = true;
                                             }
                                         }
 
@@ -472,6 +475,204 @@ Rectangle {
                                                         value: masterVolume.level / 100
                                                         onMoved: (v) => {
                                                             masterVolume.setVolume(Math.round(v * 100));
+                                                        }
+                                                    }
+
+                                                }
+
+                                            }
+
+                                        }
+
+                                        Rectangle {
+                                            id: qsLevel
+
+                                            property bool hoverQsLevel: false
+
+                                            height: 25
+                                            width: 660
+                                            color: "transparent"
+
+                                            MouseArea {
+                                                anchors.fill: qsLevel
+                                                hoverEnabled: true
+                                                cursorShape: Qt.PointingHandCursor
+                                                onEntered: {
+                                                    qsLevel.hoverQsLevel = true;
+                                                    hoverSound.play();
+                                                }
+                                                onExited: qsLevel.hoverQsLevel = false
+                                            }
+
+                                            RowLayout {
+                                                anchors.fill: qsLevel
+                                                spacing: 0
+                                                Layout.fillWidth: true
+                                                Layout.fillHeight: true
+
+                                                Rectangle {
+                                                    height: 8
+                                                    color: "transparent"
+                                                    opacity: qsLevel.hoverQsLevel ? 1 : 0
+
+                                                    Rectangle {
+                                                        height: 8
+                                                        width: 250
+                                                        Layout.alignment: Qt.AlignVCenter
+
+                                                        gradient: Gradient {
+                                                            orientation: Gradient.Horizontal
+
+                                                            GradientStop {
+                                                                position: 0
+                                                                color: "transparent"
+                                                            }
+
+                                                            GradientStop {
+                                                                position: 0.5
+                                                                color: Colors.greyx10
+                                                            }
+
+                                                            GradientStop {
+                                                                position: 1
+                                                                color: "transparent"
+                                                            }
+
+                                                        }
+
+                                                    }
+
+                                                    Behavior on opacity {
+                                                        NumberAnimation {
+                                                            duration: 160
+                                                        }
+
+                                                    }
+
+                                                }
+
+                                                Rajdhani {
+                                                    size: Texts.sm
+                                                    pl: 4
+                                                    text: "FX"
+                                                    color: qsLevel.hoverQsLevel ? Colors.greyx : Colors.redx
+                                                }
+
+                                                FillX {
+                                                }
+
+                                                Rectangle {
+                                                    height: 25
+                                                }
+
+                                                Rectangle {
+                                                    width: 220
+                                                    height: 24
+                                                    color: "transparent"
+
+                                                    Slider {
+                                                        value: qsVolume.level / 100
+                                                        onMoved: (v) => {
+                                                            qsVolume.setVolume(Math.round(v * 100));
+                                                        }
+                                                    }
+
+                                                }
+
+                                            }
+
+                                        }
+
+                                        Rectangle {
+                                            id: mpdLevel
+
+                                            property bool hoverMpdLevel: false
+
+                                            height: 25
+                                            width: 660
+                                            color: "transparent"
+
+                                            MouseArea {
+                                                anchors.fill: mpdLevel
+                                                hoverEnabled: true
+                                                cursorShape: Qt.PointingHandCursor
+                                                onEntered: {
+                                                    mpdLevel.hoverMpdLevel = true;
+                                                    hoverSound.play();
+                                                }
+                                                onExited: mpdLevel.hoverMpdLevel = false
+                                            }
+
+                                            RowLayout {
+                                                anchors.fill: mpdLevel
+                                                spacing: 0
+                                                Layout.fillWidth: true
+                                                Layout.fillHeight: true
+
+                                                Rectangle {
+                                                    height: 8
+                                                    color: "transparent"
+                                                    opacity: mpdLevel.hoverMpdLevel ? 1 : 0
+
+                                                    Rectangle {
+                                                        height: 8
+                                                        width: 250
+                                                        Layout.alignment: Qt.AlignVCenter
+
+                                                        gradient: Gradient {
+                                                            orientation: Gradient.Horizontal
+
+                                                            GradientStop {
+                                                                position: 0
+                                                                color: "transparent"
+                                                            }
+
+                                                            GradientStop {
+                                                                position: 0.5
+                                                                color: Colors.greyx10
+                                                            }
+
+                                                            GradientStop {
+                                                                position: 1
+                                                                color: "transparent"
+                                                            }
+
+                                                        }
+
+                                                    }
+
+                                                    Behavior on opacity {
+                                                        NumberAnimation {
+                                                            duration: 160
+                                                        }
+
+                                                    }
+
+                                                }
+
+                                                Rajdhani {
+                                                    size: Texts.sm
+                                                    pl: 4
+                                                    text: "Radiostation"
+                                                    color: mpdLevel.hoverMpdLevel ? Colors.greyx : Colors.redx
+                                                }
+
+                                                FillX {
+                                                }
+
+                                                Rectangle {
+                                                    height: 25
+                                                }
+
+                                                Rectangle {
+                                                    width: 220
+                                                    height: 24
+                                                    color: "transparent"
+
+                                                    Slider {
+                                                        value: mpdVolume.level / 100
+                                                        onMoved: (v) => {
+                                                            mpdVolume.setVolume(Math.round(v * 100));
                                                         }
                                                     }
 
