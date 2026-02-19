@@ -30,7 +30,7 @@ QtObject {
     readonly property color darkbluex30: "#4D0E0E17"
     readonly property color darkbluex40: "#400E0E17"
     readonly property color darkbluex70: "#B30E0E17"
-    readonly property color darkbluex80: "#CC0E0E17"
+    readonly property color darkbluex80: "#0E0E17cc"
     readonly property color redx: "#f75049"
     readonly property color redx10: "#1AF75049"
     readonly property color redx30: "#4DF75049"

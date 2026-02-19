@@ -23,7 +23,7 @@ PanelWindow {
     color: "transparent"
     WlrLayershell.layer: WlrLayer.Overlay
     implicitWidth: anyPanelActive ? Math.min(wLogOutContentColumn.implicitWidth, 310) : 0
-    implicitHeight: anyPanelActive ? Math.min(wLogOutContentColumn.implicitHeight, 300) : 0
+    implicitHeight: anyPanelActive ? Math.min(wLogOutContentColumn.implicitHeight, 320) : 0
     onAnyPanelActiveChanged: {
         anyPanelActive ? launchIns.play() : launchOut.play();
     }
@@ -85,7 +85,7 @@ PanelWindow {
             WinSwitchPanelWrapper {
                 active: GlobalState.wLogOutActive
                 panelWidth: 310
-                panelHeight: 300
+                panelHeight: 320
 
                 WLogOutPanelContent {
                 }

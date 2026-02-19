@@ -1,3 +1,4 @@
+import QtMultimedia
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -15,7 +16,7 @@ Rectangle {
     id: root
 
     width: 310
-    height: 300
+    height: 320
     color: "transparent"
 
     RowLayout {
@@ -25,76 +26,24 @@ Rectangle {
         ColumnLayout {
             spacing: 4
             Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-
-            BinLinesState {
-            }
-
-            Image {
-                source: "../assets/icons/panel/hardware-icon.png"
-                width: 20
-                height: 20
-                fillMode: Image.PreserveAspectFit
-
-                SequentialAnimation on opacity {
-                    loops: Animation.Infinite
-                    running: GlobalState.launcherActive && root.visible
-
-                    NumberAnimation {
-                        from: 1
-                        to: 0
-                        duration: 1000
-                    }
-
-                    NumberAnimation {
-                        from: 0
-                        to: 1
-                        duration: 1000
-                    }
-
-                }
-
-            }
-
         }
 
         Rectangle {
-            width: 290
-            height: 300
+            width: 300
+            height: 320
             color: "transparent"
 
             ColumnLayout {
                 Layout.fillWidth: true
                 spacing: 3
 
-                Orbitron {
-                    text: "CONNECTION_D-BUS 1.001.1"
-                    size: 8
-                    color: Colors.redx70
-                }
-
-                Rajdhani {
-                    text: "wlogout"
-                    size: Texts.sm
-                    uppercase: true
-                    color: Colors.greyx
-                    fontWeight: "medium"
-                }
-
                 BorderXRed40 {
-                    lineWidth: 270
-                }
-
-                Rajdhani {
-                    text: "wayland"
-                    size: Texts.xxxs
-                    uppercase: true
-                    color: Colors.redx
-                    fontWeight: "medium"
+                    lineWidth: 1
                 }
 
                 Rectangle {
                     width: 290
-                    height: 300
+                    height: 144
                     color: "transparent"
 
                     WLogout {
@@ -144,18 +93,11 @@ Rectangle {
 
                 }
 
-                BorderXRed40 {
-                    lineWidth: 298
-                }
-
                 RowLayout {
                     spacing: 10
 
                     SysImgText {
-                    }
-
-                    Item {
-                        Layout.fillWidth: true
+                        size: 6
                     }
 
                     Rectangle {
@@ -180,7 +122,7 @@ Rectangle {
                         PanelActionOutLabel {
                             id: radioExit
 
-                            keyText: "C"
+                            keyText: "esc"
                             labelText: "CLose"
                         }
 
