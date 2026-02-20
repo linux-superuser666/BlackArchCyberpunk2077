@@ -7,9 +7,10 @@ Item {
 
     property bool recording: false
     property bool isArea: false
+    property bool withMic: false
+    property bool withDesktop: false
     property int delaySec: 0
     property string savedPath: ""
-    property int recorderPid: -1
 
     function generatePath() {
         return "/home/$USER/Videos/recording-" + Qt.formatDateTime(new Date(), "yyyyMMdd-hhmmss") + ".mp4";
@@ -20,6 +21,8 @@ Item {
             return ;
 
         isArea = (mode === "area");
+        withMic = (mode === "mic" || mode === "mixed");
+        withDesktop = (mode === "mixed");
         delaySec = delay;
         savedPath = generatePath();
         if (delaySec > 0) {
@@ -32,10 +35,17 @@ Item {
     }
 
     function startRecording() {
-        if (isArea)
-            recordProc.command = ["sh", "-c", "wf-recorder -g \"$(slurp)\" -f \"" + savedPath + "\""];
+        let audioArg = "";
+        if (withMic && withDesktop)
+            audioArg = "--audio"; // PipeWire auto mix
+        else if (withMic)
+            audioArg = "--audio";
         else
-            recordProc.command = ["sh", "-c", "wf-recorder -f \"" + savedPath + "\""];
+            audioArg = "";
+        if (isArea)
+            recordProc.command = ["sh", "-c", "wf-recorder " + audioArg + " -g \"$(slurp)\" -f \"" + savedPath + "\""];
+        else
+            recordProc.command = ["sh", "-c", "wf-recorder " + audioArg + " -f \"" + savedPath + "\""];
         recordProc.running = true;
         recording = true;
         notify("Screen Recorder", "Recording started", "");
@@ -69,13 +79,9 @@ Item {
         onTriggered: startRecording()
     }
 
-    // recorder process
     Process {
         id: recordProc
 
-        onStarted: {
-            recording = true;
-        }
         onExited: (exitCode, exitStatus) => {
             recording = false;
             if (exitCode === 0)
@@ -85,7 +91,6 @@ Item {
         }
     }
 
-    // stop via pkill
     Process {
         id: stopProc
 

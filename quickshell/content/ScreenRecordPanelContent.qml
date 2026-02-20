@@ -27,6 +27,18 @@ Rectangle {
         }
 
         ScreenRecordButton {
+            text: "Mic"
+            mode: "mic"
+            delay: 0
+        }
+
+        ScreenRecordButton {
+            text: "Mic + Desktop"
+            mode: "mixed"
+            delay: 0
+        }
+
+        ScreenRecordButton {
             text: "Stop"
             mode: "full"
             delay: 0
