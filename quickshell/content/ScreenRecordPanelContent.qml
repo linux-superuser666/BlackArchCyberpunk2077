@@ -9,37 +9,37 @@ Rectangle {
 
     ScreenRecord {
         ScreenRecordButton {
-            text: "Record Full"
+            text: ""
             mode: "full"
             delay: 0
         }
 
         ScreenRecordButton {
-            text: "Record Area"
+            text: "󱣴"
             mode: "area"
             delay: 0
         }
 
         ScreenRecordButton {
-            text: "Full (5s)"
+            text: "   5s"
             mode: "full"
             delay: 5
         }
 
         ScreenRecordButton {
-            text: "Mic"
+            text: ""
             mode: "mic"
             delay: 0
         }
 
         ScreenRecordButton {
-            text: "Mic + Desktop"
+            text: " + "
             mode: "mixed"
             delay: 0
         }
 
         ScreenRecordButton {
-            text: "Stop"
+            text: ""
             mode: "full"
             delay: 0
         }

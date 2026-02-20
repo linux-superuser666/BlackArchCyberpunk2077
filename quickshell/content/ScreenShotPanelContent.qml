@@ -9,37 +9,37 @@ Rectangle {
 
     ScreenShot {
         ScreenShotButton {
-            text: "Full"
+            text: "   "
             mode: "full"
             delay: 0
         }
 
         ScreenShotButton {
-            text: "Area"
+            text: "󱣴   "
             mode: "area"
             delay: 0
         }
 
         ScreenShotButton {
-            text: "Full 5s"
+            text: "    5s"
             mode: "full"
             delay: 5
         }
 
         ScreenShotButton {
-            text: "Full 10s"
+            text: "    10s"
             mode: "full"
             delay: 10
         }
 
         ScreenShotButton {
-            text: "Area 5s"
+            text: "󱣴  5s"
             mode: "area"
             delay: 5
         }
 
         ScreenShotButton {
-            text: "Area 10s"
+            text: "󱣴  10s"
             mode: "area"
             delay: 10
         }

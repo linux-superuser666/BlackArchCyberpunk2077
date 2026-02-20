@@ -161,7 +161,16 @@ Rectangle {
 
                                 ColumnLayout {
                                     anchors.centerIn: parent
-                                    spacing: 0
+                                    spacing: -5
+
+                                    Text {
+                                        text: "󰑋"
+                                        font.pointSize: Texts.xxxl
+                                        font.family: "mono"
+                                        font.weight: Font.Medium
+                                        color: Colors.greyx
+                                        horizontalAlignment: Text.AlignHCenter
+                                    }
 
                                     Text {
                                         text: modelData.text
