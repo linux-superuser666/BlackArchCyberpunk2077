@@ -23,6 +23,14 @@ ShellRoot {
         delegate: Scope {
             required property var modelData
 
+            ScreenRecordPanel {
+                screen: modelData
+            }
+
+            ScreenShotPanel {
+                screen: modelData
+            }
+
             NetworkPanel {
                 screen: modelData
             }

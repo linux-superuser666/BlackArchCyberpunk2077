@@ -63,11 +63,6 @@ Rectangle {
     color: "transparent"
     focus: true
     activeFocusOnTab: true
-    Component.onCompleted: {
-        Qt.callLater(() => {
-            return forceActiveFocus();
-        });
-    }
 
     SoundEffect {
         id: hoverSound

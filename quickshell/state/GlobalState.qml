@@ -19,6 +19,24 @@ QtObject {
     property bool winSwitchActive: false
     property bool netPopupVisible: false
     property bool wLogOutActive: false
+    property bool screenShotActive: false
+    property bool screenRecordActive: false
+
+    function toggleScreenRecord() {
+        GlobalState.screenRecordActive = !GlobalState.screenRecordActive;
+    }
+
+    function closeScreenRecord() {
+        screenRecordActive = false;
+    }
+
+    function toggleScreenShot() {
+        GlobalState.screenShotActive = !GlobalState.screenShotActive;
+    }
+
+    function closeScreenShot() {
+        screenShotActive = false;
+    }
 
     function toggleWLogOut() {
         GlobalState.wLogOutActive = !GlobalState.wLogOutActive;

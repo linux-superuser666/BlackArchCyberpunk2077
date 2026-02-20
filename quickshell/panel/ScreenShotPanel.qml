@@ -7,23 +7,24 @@ import Quickshell.Hyprland
 import Quickshell.Io
 import Quickshell.Wayland
 import qs.components.common
+import qs.components.panel.screenshot
 import qs.components.wrapper
 import qs.content
 import qs.state
 
 PanelWindow {
-    id: wlogout
+    id: screenShot
 
-    property bool anyPanelActive: GlobalState.wLogOutActive
+    property bool anyPanelActive: GlobalState.screenShotActive
     required property var screen
 
     visible: anyPanelActive
-    WlrLayershell.keyboardFocus: GlobalState.wLogOutActive
+    WlrLayershell.keyboardFocus: GlobalState.screenShotActive
     screen: screen
     color: "transparent"
     WlrLayershell.layer: WlrLayer.Overlay
-    implicitWidth: anyPanelActive ? Math.min(wLogOutContentColumn.implicitWidth, 310) : 0
-    implicitHeight: anyPanelActive ? Math.min(wLogOutContentColumn.implicitHeight, 300) : 0
+    implicitWidth: anyPanelActive ? Math.min(screenShotContentColumn.implicitWidth, 310) : 0
+    implicitHeight: anyPanelActive ? Math.min(screenShotContentColumn.implicitHeight, 300) : 0
     onAnyPanelActiveChanged: {
         anyPanelActive ? launchIns.play() : launchOut.play();
     }
@@ -51,10 +52,10 @@ PanelWindow {
 
     IpcHandler {
         function toggle() {
-            GlobalState.toggleWLogOut();
+            GlobalState.toggleScreenShot();
         }
 
-        target: "wlogout"
+        target: "screenshot"
     }
 
     FocusScope {
@@ -69,25 +70,25 @@ PanelWindow {
             switch (event.key) {
             case Qt.Key_C:
             case Qt.Key_Escape:
-                GlobalState.closeWLogOut();
+                GlobalState.closeScreenShot();
                 event.accepted = true;
                 break;
             }
         }
 
         ColumnLayout {
-            id: wLogOutContentColumn
+            id: screenShotContentColumn
 
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             spacing: 0
 
-            WinSwitchPanelWrapper {
-                active: GlobalState.wLogOutActive
+            ScreenShotPanelWrapper {
+                active: GlobalState.screenShotActive
                 panelWidth: 310
                 panelHeight: 300
 
-                WLogOutPanelContent {
+                ScreenShotPanelContent {
                 }
 
             }
