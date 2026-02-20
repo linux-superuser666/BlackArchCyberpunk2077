@@ -26,15 +26,15 @@ PanelWindow {
     ]
 
     property var wsIcons: [
-        { idle: "../assets/ws/ws1_idle.png", occupied: "../assets/ws/ws1_occ.png", active: "../assets/ws/ws1_act.png" },
-        { idle: "../assets/ws/ws2_idle.png", occupied: "../assets/ws/ws2_occ.png", active: "../assets/ws/ws2_act.png" },
-        { idle: "../assets/ws/ws3_idle.png", occupied: "../assets/ws/ws3_occ.png", active: "../assets/ws/ws3_act.png" },
-        { idle: "../assets/ws/ws4_idle.png", occupied: "../assets/ws/ws4_occ.png", active: "../assets/ws/ws4_act.png" },
-        { idle: "../assets/ws/ws5_idle.png", occupied: "../assets/ws/ws5_occ.png", active: "../assets/ws/ws5_act.png" },
-        { idle: "../assets/ws/ws6_idle.png", occupied: "../assets/ws/ws6_occ.png", active: "../assets/ws/ws6_act.png" },
-        { idle: "../assets/ws/ws7_idle.png", occupied: "../assets/ws/ws7_occ.png", active: "../assets/ws/ws7_act.png" },
-        { idle: "../assets/ws/ws8_idle.png", occupied: "../assets/ws/ws8_occ.png", active: "../assets/ws/ws8_act.png" },
-        { idle: "../assets/ws/ws9_idle.png", occupied: "../assets/ws/ws9_occ.png", active: "../assets/ws/ws9_act.png" }
+        { idle: "../assets/ws/ws1-idle.png", occupied: "../assets/ws/ws1-occ.png", active: "../assets/ws/ws1-act.png" },
+        { idle: "../assets/ws/ws2-idle.png", occupied: "../assets/ws/ws2-occ.png", active: "../assets/ws/ws2-act.png" },
+        { idle: "../assets/ws/ws3-idle.png", occupied: "../assets/ws/ws3-occ.png", active: "../assets/ws/ws3-act.png" },
+        { idle: "../assets/ws/ws4-idle.png", occupied: "../assets/ws/ws4-occ.png", active: "../assets/ws/ws4-act.png" },
+        { idle: "../assets/ws/ws5-idle.png", occupied: "../assets/ws/ws5-occ.png", active: "../assets/ws/ws5-act.png" },
+        { idle: "../assets/ws/ws6-idle.png", occupied: "../assets/ws/ws6-occ.png", active: "../assets/ws/ws6-act.png" },
+        { idle: "../assets/ws/ws7-idle.png", occupied: "../assets/ws/ws7-occ.png", active: "../assets/ws/ws7-act.png" },
+        { idle: "../assets/ws/ws8-idle.png", occupied: "../assets/ws/ws8-occ.png", active: "../assets/ws/ws8-act.png" },
+        { idle: "../assets/ws/ws9-idle.png", occupied: "../assets/ws/ws9-occ.png", active: "../assets/ws/ws9-act.png" }
     ]
 
     screen: screen
